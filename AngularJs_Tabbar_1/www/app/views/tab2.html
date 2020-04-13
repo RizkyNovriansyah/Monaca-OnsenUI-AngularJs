@@ -1,9 +1,10 @@
 <template id="tabdua">
     <ons-page id="Tab2" ng-controller="LoginController as $page">
         <p style="text-align: center;">
-        This is the second page.
+        <!-- Login. -->
         </p>
-        <div ng-hide="$page.token" style="text-align: center; margin-top: 30px">
+        
+        <div ng-hide="tokenExist" style="text-align: center; margin-top: 30px">
             <p>
                 <ons-input id="username" modifier="underbar" placeholder="Username" float ng-model="$page.username" value="adminBaru"></ons-input>
             </p>
@@ -12,6 +13,11 @@
             </p>
             <p style="margin-top: 30px;">
                 <ons-button ng-click="$page.login()">Sign in</ons-button>
+            </p>
+        </div>
+        <div ng-show="tokenExist" style="text-align: center; margin-top: 30px">
+            <p style="margin-top: 30px;">
+                <ons-button ng-click="$page.logout()">Log out</ons-button>
             </p>
         </div>
     </ons-page>

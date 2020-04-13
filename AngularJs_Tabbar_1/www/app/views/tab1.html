@@ -1,7 +1,18 @@
 <template id="tabsatu">
     <ons-page id="Tab1" ng-controller="KaryawansController as $page">
-        <ons-button ng-click="$page.refresh()">Refresh</ons-button>
-        <div ng-repeat="k in $page.karyawans"> 
+
+        <ons-pull-hook ng-action="$page.refresh($done)" var="loader">
+            <span ng-switch="loader.state">
+                <span ng-switch-when="initial"><ons-icon size="35px" icon="ion-arrow-down-a"></ons-icon> Pull down to refresh</span>
+                <span ng-switch-when="preaction"><ons-icon size="35px" icon="ion-arrow-up-a"></ons-icon> Release to refresh</span>
+                <span ng-switch-when="action"><ons-icon size="35px" spin="true" icon="ion-load-d"></ons-icon> Loading data...</span>
+            </span>
+        </ons-pull-hook>
+
+        <ons-button ng-show="tokenExist" modifier="large--quiet">Tambah</ons-button>
+
+        <!-- <ons-button ng-click="$page.refresh()">Refresh</ons-button> -->
+        <div ng-show="tokenExist" ng-repeat="k in $page.karyawans"> 
             <ons-card>
                 <div class="title">
                 {{ k.nama }}
