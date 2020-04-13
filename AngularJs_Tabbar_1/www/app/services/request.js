@@ -1,21 +1,24 @@
 const baseController = "http://127.0.0.1:8000/"
 const apiBaseController = baseController+"api/"
 const login = baseController + "api-token-auth/";
-const karyawans = apiBaseController + "karyawans";
-
-function setupRequest(service, link, $http, LoginModel) {
+const karyawans = apiBaseController + "karyawans/";
+var TokenUser = "";
+let isDebug = true;
+let useHeader = true;
+function setupRequest(service, link, $http) {
 	if (isDebug) {
 		console.log(service, link);
 	}
 	if (useHeader) {
-		$http.defaults.headers.common.Authorization = LoginModel.cekTokenUser();
+		console.log("user header "+'Token '+TokenUser);
+		// $http.defaults.headers.common.Authorization = 'Token '+TokenUser;
 	}
 }
-app.factory('LoginService', function ($http, LoginModel) {
+module.factory('LoginService', function ($http) {
 	return {
 		login: function (post) {
 			var path = login;
-			// logRequest('LoginService', path);
+			console.log("login service ", path)
 			return $http
 				.post(path, post)
 				.then(function (response) {
@@ -24,20 +27,26 @@ app.factory('LoginService', function ($http, LoginModel) {
 		},
 	};
 });
-app.factory('KaryawansService', function ($http, LoginModel) {
+module.factory('KaryawansService', function ($http) {
 	let log = karyawans;
 	return {
         get: function () {
 			var path = log;
-			setupRequest(log, path, $http, LoginModel);
-			return $http.get(path, function (response) {
+			return $http.get(path, 
+				{
+					headers: {
+						'Authorization': 'Token '+TokenUser,
+						// 'Content-Type': 'application/json; charset=utf-8'
+					}
+				},
+				function (response) {
 				return response.data;
 			});
         },
         
         insert: function (post) {
 			var path = log;
-			setupRequest(log, path, $http, LoginModel);
+			// setupRequest(log, path, $http, LoginModel);
 			return $http
 				.post(path, post)
 				.then(function (response) {
@@ -46,14 +55,14 @@ app.factory('KaryawansService', function ($http, LoginModel) {
 		},
 		find_id: function (id) {
 			var path = log + '/' + id;
-			setupRequest(log, path, $http, LoginModel);
+			// setupRequest(log, path, $http, LoginModel);
 			return $http.get(path, function (response) {
 				return response.data;
 			});
 		},
 		update: function (id, post) {
 			var path = log + '/' + id;
-			setupRequest(log, path, $http, LoginModel);
+			// setupRequest(log, path, $http, LoginModel);
 			return $http
 				.post(path, post)
 				.then(function (response) {
@@ -62,7 +71,7 @@ app.factory('KaryawansService', function ($http, LoginModel) {
 		},
 		delete: function (id) {
 			var path = log + '/' + id;
-			setupRequest(log, path, $http, LoginModel);
+			// setupRequest(log, path, $http, LoginModel);
 			return $http.get(path, function (response) {
 				return response.data;
 			});

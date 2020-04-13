@@ -20,8 +20,13 @@
       document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
     }
   </script>
+
+<script src="app.js"></script>
+<script src="app/services/request.js"></script>
 </head>
 <body ng-controller="RootController">
+  <div ng-include src="'app/views/tab1.html'"></div>
+  <div ng-include src="'app/views/tab2.html'"></div>
 
   <ons-page ng-controller="TabbarController">
     <ons-toolbar>
@@ -29,17 +34,14 @@
     </ons-toolbar>
   
     <ons-tabbar swipeable position="auto" ons-prechange="updateTitle($event)">
-      <ons-tab page="tab1.html" label="Karyawans" icon="ion-home, material:md-home" badge="7" active>
+      <ons-tab page="tabsatu" label="Karyawans" icon="ion-home, material:md-home" active>
       </ons-tab>
-      <ons-tab page="tab2.html" label="Login" icon="md-settings" active-icon="md-face">
+      <ons-tab page="tabdua" label="Login" icon="md-settings" active-icon="md-face">
       </ons-tab>
     </ons-tabbar>
   </ons-page>
   
-  <div ng-include src="'app/tab1.html'"></div>
-  <div ng-include src="'app/tab2.html'"></div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.14/angular-ui-router.js"></script>
-  <script src="app.js"></script>
+  
+  
 </body>
 </html>
