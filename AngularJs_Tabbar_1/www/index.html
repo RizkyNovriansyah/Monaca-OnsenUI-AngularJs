@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html ng-app="myApp">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -15,46 +15,31 @@
   <link rel="stylesheet" href="css/style.css">
 
   <script>
-    ons.bootstrap()
-      .controller('AppController', function() {
-      });
-    ons.ready(function() {
-        console.log("Onsen UI is ready!");
-    });
-
     if (ons.platform.isIPhoneX()) {
       document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
       document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
     }
   </script>
 </head>
-<body>
-  <ons-page ng-controller="AppController as app">
-    <ons-toolbar>
-      <div class="center">My App - {{app.title}}</div>
-    </ons-toolbar>
+<body ng-controller="RootController">
 
-    <ons-tabbar position="auto">
-      <ons-tab page="page1.html" label="Page 1" icon="square" active></ons-tab>
-      <ons-tab page="page2.html" label="Page 2" icon="square"></ons-tab>
+  <ons-page ng-controller="TabbarController">
+    <ons-toolbar>
+      <div class="center">{{title}}</div>
+    </ons-toolbar>
+  
+    <ons-tabbar swipeable position="auto" ons-prechange="updateTitle($event)">
+      <ons-tab page="tab1.html" label="Karyawans" icon="ion-home, material:md-home" badge="7" active>
+      </ons-tab>
+      <ons-tab page="tab2.html" label="Login" icon="md-settings" active-icon="md-face">
+      </ons-tab>
     </ons-tabbar>
   </ons-page>
+  
+  <div ng-include src="'app/tab1.html'"></div>
+  <div ng-include src="'app/tab2.html'"></div>
 
-  <ons-template id="page1.html">
-    <ons-page ons-show="app.title = 'Page 1'">
-      <div class="content" style="text-align: center">
-        <p>Page 1 content</p>
-      </div>
-    </ons-page>
-  </ons-template>
-
-  <ons-template id="page2.html">
-    <ons-page ons-show="app.title = 'Page 2'">
-      <div class="content" style="text-align: center">
-        <p>Page 2 content</p>
-      </div>
-    </ons-page>
-  </ons-template>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.14/angular-ui-router.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
