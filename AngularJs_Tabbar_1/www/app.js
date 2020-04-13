@@ -19,11 +19,11 @@ module.controller('TabbarController', function($scope) {
 module.controller('KaryawansController', function($scope, KaryawansService) {
     console.log('KaryawansController');
     let ctrl = this;
-    
+    ctrl.karyawans = []
     ctrl.refresh = function () {
         KaryawansService.get().then(function (response) {
-            console.log('response', response);
-    
+            console.log('response', response.data.results);
+            ctrl.karyawans = response.data.results;
         }, (errorRequest) => {
             console.log('errorRequest', errorRequest);
             ons.notification.alert('error');

@@ -1,5 +1,18 @@
 <template id="tabsatu">
-    <ons-page id="Tab1" ng-controller="KaryawansController as page">
-        <ons-button ng-click="page.refresh()">Refresh</ons-button>
+    <ons-page id="Tab1" ng-controller="KaryawansController as $page">
+        <ons-button ng-click="$page.refresh()">Refresh</ons-button>
+        <div ng-repeat="k in $page.karyawans"> 
+            <ons-card>
+                <div class="title">
+                {{ k.nama }}
+                </div>
+                <div class="content">
+                    <p>
+                        {{ k.jenis_karyawan }}
+                    </p>
+                </div>
+            </ons-card>
+        </div>
+        
     </ons-page>
   </template>

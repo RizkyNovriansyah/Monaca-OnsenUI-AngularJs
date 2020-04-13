@@ -1,17 +1,17 @@
 <template id="tabdua">
-    <ons-page id="Tab2" ng-controller="LoginController as page">
+    <ons-page id="Tab2" ng-controller="LoginController as $page">
         <p style="text-align: center;">
         This is the second page.
         </p>
-        <div ng-hide="page.token" style="text-align: center; margin-top: 30px">
+        <div ng-hide="$page.token" style="text-align: center; margin-top: 30px">
             <p>
-                <ons-input id="username" modifier="underbar" placeholder="Username" float ng-model="page.username"></ons-input>
+                <ons-input id="username" modifier="underbar" placeholder="Username" float ng-model="$page.username" value="adminBaru"></ons-input>
             </p>
             <p>
-                <ons-input id="password" modifier="underbar" type="password" placeholder="Password" float ng-model="page.password"></ons-input>
+                <ons-input id="password" modifier="underbar" type="password" placeholder="Password" float ng-model="$page.password" value="@dm!n123$"></ons-input>
             </p>
             <p style="margin-top: 30px;">
-                <ons-button ng-click="page.login()">Sign in</ons-button>
+                <ons-button ng-click="$page.login()">Sign in</ons-button>
             </p>
         </div>
     </ons-page>
