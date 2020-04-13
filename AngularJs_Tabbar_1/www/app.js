@@ -16,11 +16,15 @@ module.config([
         $urlRouterProvider,
         $location
     ) {
-        // console.log("config", $location.path());
         $stateProvider
             .state("home", {
                 url: "/home",
                 templateUrl: "app/views/home.html",
+            })
+            .state("formKaryawan", {
+                url: "/formKaryawan",
+                templateUrl: "app/views/form_karyawan.html",
+                controller:"FormKaryawansController"
             })
     }
 ]);
@@ -28,6 +32,7 @@ module.config([
 module.controller('RootController', function($scope,$state) {
     console.log("config1");
     $state.transitionTo("home");
+    
 });
 
 module.controller('PageController', function($scope) {
@@ -42,7 +47,11 @@ module.controller('TabbarController', function($scope) {
         $scope.title = angular.element($event.tabItem).attr('label');
     };
 });
-
+module.controller('FormKaryawansController', function($scope, KaryawansService) {
+    console.log('FormKaryawansController');
+    let ctrl = this;
+    
+});
 module.controller('KaryawansController', function($scope, KaryawansService) {
     console.log('KaryawansController');
     let ctrl = this;
@@ -59,7 +68,6 @@ module.controller('KaryawansController', function($scope, KaryawansService) {
             $done();
         });    
     }
-    
 });
 module.controller('LoginController', function($rootScope, LoginService) {
     console.log('LoginController');

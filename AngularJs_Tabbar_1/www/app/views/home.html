@@ -1,16 +1,15 @@
-<div ng-include src="'app/views/tab1.html'"></div>
-  <div ng-include src="'app/views/tab2.html'"></div>
-
-  <ons-page ng-controller="TabbarController">
+<div ng-include src="'app/views/tabsatu.html'"  onload="loaded1=true"></div>
+<div ng-include src="'app/views/tabdua.html'"  onload="loaded2=true"></div>
+<ons-page ng-controller="TabbarController" ng-if="loaded1 && loaded2" >
     <ons-toolbar>
-      <div class="center">{{title}}</div>
+        <div class="center">{{title}}</div>
     </ons-toolbar>
-  
+    
     <ons-tabbar swipeable position="auto" ons-prechange="updateTitle($event)">
-      <ons-tab page="tabsatu" label="Karyawans" icon="ion-home, material:md-home" active>
-      </ons-tab>
-      <ons-tab page="tabdua" label="Login" icon="md-face" active-icon="md-face">
-      </ons-tab>
+        <ons-tab page="tabsatu" label="Karyawans" icon="ion-home, material:md-home" active>
+        </ons-tab>
+        <ons-tab page="tabdua" label="Login" icon="md-face" active-icon="md-face">
+        </ons-tab>
     </ons-tabbar>
-  </ons-page>
-  
+    
+</ons-page>
