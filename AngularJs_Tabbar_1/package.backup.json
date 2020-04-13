@@ -16,10 +16,8 @@
         "monaca-plugin-monaca-core": "3.3.0"
     },
     "scripts": {
-        "monaca:preview": "npm run dev & npm run watch",
-        "dev": "browser-sync start -s www/ --watch --port 8080 --ui-port 8081",
-        "monaca:transpile": "npm run build",
-        "monaca:debug": "npm run watch"
+        "monaca:preview": "npm run dev",
+        "dev": "browser-sync start -s www/ --watch --port 8080 --ui-port 8081"
     },
     "devDependencies": {
         "browser-sync": "^2.26.7",
