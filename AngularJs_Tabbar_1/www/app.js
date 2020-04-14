@@ -59,7 +59,7 @@ module.controller('TabbarController', function($scope) {
         $scope.title = angular.element($event.tabItem).attr('label');
     };
 });
-module.controller('FormKaryawansController', function($scope, $stateParams, KaryawansService, $http, $location) {
+module.controller('FormKaryawansController', function($stateParams, KaryawansService, $location) {
     let ctrl = this;
     ctrl.formType = 'add';
     let idKaryawan;
@@ -89,28 +89,16 @@ module.controller('FormKaryawansController', function($scope, $stateParams, Kary
             divisi:ctrl.form.divisi
         };
     
-        var config = {
-            headers : {
-                'Authorization': 'Token '+TokenUser,
-            }
-        }
-
-        $http.post(karyawans, data, config)
-        .then(function(response){
-            console.log("response", response)
+        KaryawansService.insert(data).then(function (response) {
+            console.log('response', response);
             $location.path("/home");
-        },function(errorResponse){
-            console.log("error");
-            ons.notification.alert('Gagal');
+        }, (errorRequest) => {
+            console.log('errorRequest', errorRequest);
+            ons.notification.alert(errorRequest.data.detail);
         });
     }
     ctrl.delete = function () {
-        var config = {
-            headers : {
-                'Authorization': 'Token '+TokenUser,
-            }
-        }
-        $http.delete(karyawans+idKaryawan+'/', config)
+        KaryawansService.delete(idKaryawan)
         .then(function(response){
             console.log("response", response)
             $location.path("/home");
@@ -138,13 +126,7 @@ module.controller('FormKaryawansController', function($scope, $stateParams, Kary
             divisi:ctrl.form.divisi
         };
     
-        var config = {
-            headers : {
-                'Authorization': 'Token '+TokenUser,
-            }
-        }
-
-        $http.put(karyawans+idKaryawan+'/', data, config)
+        KaryawansService.update(idKaryawan, data)
         .then(function(response){
             console.log("response", response)
             $location.path("/home");
@@ -164,7 +146,7 @@ module.controller('FormKaryawansController', function($scope, $stateParams, Kary
         });
     }
 });
-module.controller('KaryawansController', function($scope, KaryawansService) {
+module.controller('KaryawansController', function(KaryawansService) {
     let ctrl = this;
     ctrl.karyawans = []
     ctrl.refresh = function ($done) {
