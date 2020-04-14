@@ -23,16 +23,26 @@ module.config([
             })
             .state("formKaryawan", {
                 url: "/formKaryawan",
-                templateUrl: "app/views/form_karyawan.html",
-                controller:"FormKaryawansController"
+                templateUrl: "app/views/form_karyawan.html"
             })
     }
 ]);
 
-module.controller('RootController', function($scope,$state) {
+module.controller('RootController', function($scope,$state,$location) {
     console.log("config1");
     $state.transitionTo("home");
-    
+
+    $scope.movePage = function (param1, param2, param3, param4) {
+        if (param4) {
+            $location.path("/" + param1 + "/" + param2 + "/" + param3 + "/" + param4);
+        } else if (param3) {
+            $location.path("/" + param1 + "/" + param2 + "/" + param3);
+        } else if (param2) {
+            $location.path("/" + param1 + "/" + param2);
+        } else if (param1) {
+            $location.path("/" + param1);
+        }
+    };
 });
 
 module.controller('PageController', function($scope) {
@@ -47,10 +57,49 @@ module.controller('TabbarController', function($scope) {
         $scope.title = angular.element($event.tabItem).attr('label');
     };
 });
-module.controller('FormKaryawansController', function($scope, KaryawansService) {
+module.controller('FormKaryawansController', function($scope, KaryawansService, $http, $location) {
     console.log('FormKaryawansController');
     let ctrl = this;
+    ctrl.form = {}
+    ctrl.submit = function () {
+        ctrl.form.jenis_kelamin = "pria";
+        ctrl.form.jenis_karyawan = "magang";
+        ctrl.form.jabatan = "1";
+        ctrl.form.divisi = "1";
+        console.log(ctrl.form);
+        // KaryawansService.insert(ctrl.form).then(function (response) {
+        //     console.log('response', response.data.results);
+        // }, (errorRequest) => {
+        //     console.log('errorRequest', errorRequest);
+        // });    
+
+        var data = {
+            nama: ctrl.form.nama,
+            aalamat: ctrl.form.alamat,
+            no_telepon: ctrl.form.no_telepon,
+            no_rekening: ctrl.form.no_rekening,
+            email: ctrl.form.email,
+            pemilik_rekening: ctrl.form.pemilik_rekening,
+            jenis_kelamin: ctrl.form.jenis_kelamin,
+            jenis_karyawan: ctrl.form.jenis_karyawan,
+            jabatan: ctrl.form.jabatan,
+            divisi:ctrl.form.divisi
+        };
     
+        var config = {
+            headers : {
+                'Authorization': 'Token '+TokenUser,
+            }
+        }
+
+        $http.post(karyawans, data, config)
+        .then(function(response){
+            console.log("response", response)
+            $location.path("/home");
+        },function(errorResponse){
+            console.log("error");
+        });
+    }
 });
 module.controller('KaryawansController', function($scope, KaryawansService) {
     console.log('KaryawansController');

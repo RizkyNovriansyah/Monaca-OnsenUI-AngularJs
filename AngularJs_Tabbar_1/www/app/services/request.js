@@ -31,27 +31,44 @@ module.factory('KaryawansService', function ($http) {
 	let log = karyawans;
 	return {
         get: function () {
+			console.log("token :", TokenUser)
 			var path = log;
 			return $http.get(path, 
 				{
 					headers: {
 						'Authorization': 'Token '+TokenUser,
-						// 'Content-Type': 'application/json; charset=utf-8'
 					}
 				},
 				function (response) {
 				return response.data;
 			});
         },
-        
         insert: function (post) {
-			var path = log;
-			// setupRequest(log, path, $http, LoginModel);
-			return $http
-				.post(path, post)
-				.then(function (response) {
-					return response.data;
-				});
+			var path = karyawans;
+			console.log("token :", TokenUser)
+			var req = {
+					method: 'POST',
+					url: path,
+					transformRequest: angular.identity, 
+					headers: {
+						'Authorization': 'Token '+TokenUser,
+					},
+					data: post
+				};
+			   
+			return $http(req).then(function(response){
+				return response.data;
+			});
+			// return $http
+			// 	.post(path, post, {
+			// 		headers: {
+			// 			'Authorization': 'Token '+TokenUser,
+			// 			'Content-Type':'application/x-www-form-urlencoded'
+			// 			}
+			// 		},)
+			// 	.then(function (response) {
+			// 		return response.data;
+			// 	});
 		},
 		find_id: function (id) {
 			var path = log + '/' + id;

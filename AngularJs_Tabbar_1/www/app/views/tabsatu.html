@@ -9,7 +9,7 @@
             </span>
         </ons-pull-hook>
 
-        <ons-button ng-show="tokenExist" modifier="large--quiet">Tambah</ons-button>
+        <ons-button ng-click="movePage('formKaryawan')" ng-show="tokenExist" modifier="large--quiet">Tambah</ons-button>
 
         <!-- <ons-button ng-click="$page.refresh()">Refresh</ons-button> -->
         <div ng-show="tokenExist" ng-repeat="k in $page.karyawans"> 

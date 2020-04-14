@@ -1,0 +1,29 @@
+<ons-page ng-controller="FormKaryawansController as $page" >
+    <ons-toolbar>
+      <div class="center">Input</div>
+    </ons-toolbar>
+  
+    <div style="text-align: center; margin-top: 30px">
+      <p>
+        <ons-input id="username" modifier="underbar" placeholder="Nama" float ng-model="$page.form.nama"></ons-input>
+      </p>
+      <p>
+        <ons-input id="password" modifier="underbar" placeholder="Alamat" float ng-model="$page.form.alamat"></ons-input>
+      </p>
+      <p>
+        <ons-input id="username" modifier="underbar" placeholder="No Telepon" float ng-model="$page.form.no_telepon"></ons-input>
+      </p>
+      <p>
+        <ons-input id="password" modifier="underbar" placeholder="No Rekening" float ng-model="$page.form.no_rekening"></ons-input>
+      </p>
+      <p>
+        <ons-input id="username" modifier="underbar" placeholder="Email" float ng-model="$page.form.email"></ons-input>
+      </p>
+      <p>
+        <ons-input id="password" modifier="underbar" placeholder="Pemilik Rekening" float ng-model="$page.form.pemilik_rekening"></ons-input>
+      </p>
+      <p style="margin-top: 30px;">
+        <ons-button ng-click="$page.submit()">Submit</ons-button>
+      </p>
+    </div>
+  </ons-page>
