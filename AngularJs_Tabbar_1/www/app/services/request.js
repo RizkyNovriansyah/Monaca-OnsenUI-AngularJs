@@ -71,9 +71,14 @@ module.factory('KaryawansService', function ($http) {
 			// 	});
 		},
 		find_id: function (id) {
-			var path = log + '/' + id;
+			var path = log + id+'/';
+			console.log("req", path);
 			// setupRequest(log, path, $http, LoginModel);
-			return $http.get(path, function (response) {
+			return $http.get(path, {
+					headers: {
+						'Authorization': 'Token '+TokenUser,
+					}
+				},function (response) {
 				return response.data;
 			});
 		},

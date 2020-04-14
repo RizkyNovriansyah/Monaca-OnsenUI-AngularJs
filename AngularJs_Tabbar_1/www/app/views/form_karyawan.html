@@ -1,6 +1,7 @@
 <ons-page ng-controller="FormKaryawansController as $page" >
     <ons-toolbar>
-      <div class="center">Input</div>
+      <div class="left" ng-click="movePage('home')"><ons-back-button>Back</ons-back-button></div>
+      <div class="center">Form Karyawan</div>
     </ons-toolbar>
   
     <div style="text-align: center; margin-top: 30px">
@@ -23,7 +24,10 @@
         <ons-input id="password" modifier="underbar" placeholder="Pemilik Rekening" float ng-model="$page.form.pemilik_rekening"></ons-input>
       </p>
       <p style="margin-top: 30px;">
-        <ons-button ng-click="$page.submit()">Submit</ons-button>
+
+        <ons-button ng-if="$page.formType == 'add'" ng-click="$page.submit()">Submit</ons-button>
+        <ons-button ng-if="$page.formType == 'edit'" ng-click="$page.save()">Save</ons-button>
+        <ons-button ng-if="$page.formType == 'edit'" modifier="quiet" ng-click="$page.delete()">Delete</ons-button>
       </p>
     </div>
   </ons-page>
